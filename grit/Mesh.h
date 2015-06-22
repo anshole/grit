@@ -10,9 +10,9 @@ class Mesh
 {
 public:
 	Mesh(std::vector<float> vertices, std::vector<int> indices);
-	~Mesh();
 
 	void render();
+	void dispose();
 
 	GLuint vertexBuffer;
 	GLuint elementBuffer;

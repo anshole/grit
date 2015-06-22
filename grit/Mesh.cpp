@@ -5,7 +5,7 @@ namespace grit {
 Mesh::Mesh(std::vector<float> vertices, std::vector<int> indices) {
 	glGenVertexArrays(1, &vaoID);
 	glBindVertexArray(vaoID);
-
+	
 	glGenBuffers(1, &vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), &vertices[0], GL_STATIC_DRAW);
@@ -22,12 +22,14 @@ Mesh::Mesh(std::vector<float> vertices, std::vector<int> indices) {
 }
 
 
-Mesh::~Mesh()
-{
+void Mesh::dispose() {
+	Utils::log("Disposing mesh.");
+	glDeleteBuffers(1, &vertexBuffer);
+	glDeleteBuffers(1, &elementBuffer);
+	glDeleteVertexArrays(1, &vaoID);
 }
 
-void Mesh::render()
-{
+void Mesh::render() {
 	glBindVertexArray(vaoID);
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);

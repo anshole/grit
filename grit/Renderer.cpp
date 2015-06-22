@@ -7,6 +7,9 @@ void Renderer::initShaders(std::string vertexShaderFile, std::string fragmentSha
 }
 
 Renderer::~Renderer() {
+	for (Mesh m : meshes) {
+		m.dispose();
+	}
 }
 
 std::vector<Mesh> Renderer::meshes;
